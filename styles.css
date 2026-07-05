@@ -1,0 +1,683 @@
+:root {
+  --bg: #f6efe3;
+  --paper: #fffaf0;
+  --paper-2: #fffdf7;
+  --ink: #2c2620;
+  --muted: #7a6d60;
+  --accent: #ff8f3d;
+  --accent-dark: #d96b18;
+  --green: #84b66f;
+  --red: #e15f5f;
+  --border: #2c2620;
+  --shadow: 8px 8px 0 rgba(44, 38, 32, 0.18);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: ui-rounded, "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 15% 15%, rgba(255,143,61,.18), transparent 25%),
+    radial-gradient(circle at 85% 20%, rgba(132,182,111,.18), transparent 25%),
+    var(--bg);
+}
+
+button, input { font: inherit; }
+
+.app {
+  width: min(1120px, calc(100% - 28px));
+  margin: 0 auto;
+  padding: 28px 0;
+}
+
+.screen { animation: popIn .35s ease both; }
+.hidden { display: none !important; }
+
+.start-screen, .job-card, .result-card {
+  width: min(720px, 100%);
+  margin: 48px auto;
+  padding: 34px;
+  border: 3px solid var(--border);
+  border-radius: 28px;
+  background: var(--paper);
+  box-shadow: var(--shadow);
+}
+
+.brand, .job-card-header, .raccoon-profile, .chat-header, .composer-actions, .result-actions, .header-actions {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.logo {
+  width: 78px;
+  height: 78px;
+  display: grid;
+  place-items: center;
+  border: 3px solid var(--border);
+  border-radius: 24px;
+  background: #ffe0bd;
+  font-size: 42px;
+  transform: rotate(-5deg);
+}
+
+.small-logo {
+  width: 64px;
+  height: 64px;
+  border-radius: 20px;
+  font-size: 34px;
+  flex: 0 0 auto;
+}
+
+.eyebrow {
+  margin: 0 0 6px;
+  color: var(--accent-dark);
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+h1, h2, h3 { margin: 0; line-height: 1.12; }
+h1 { font-size: clamp(40px, 6vw, 72px); }
+h2 { font-size: clamp(24px, 3vw, 38px); }
+h3 { font-size: 22px; }
+
+.intro, .job-desc, .card-note, .hint-text, .result-comment {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.intro { margin: 24px 0; font-size: 18px; }
+.profile-form { display: grid; gap: 16px; }
+
+label { display: grid; gap: 8px; font-weight: 900; }
+
+input, .answer-box {
+  width: 100%;
+  border: 3px solid var(--border);
+  border-radius: 16px;
+  padding: 14px 16px;
+  color: var(--ink);
+  background: white;
+  outline: none;
+}
+
+input:focus, .answer-box:focus { box-shadow: 0 0 0 4px rgba(255, 143, 61, .25); }
+
+.primary-btn, .secondary-btn, .mic-btn, .ghost-btn {
+  border: 3px solid var(--border);
+  border-radius: 999px;
+  padding: 12px 18px;
+  font-weight: 950;
+  cursor: pointer;
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+}
+
+.primary-btn { background: var(--accent); color: var(--ink); box-shadow: 4px 4px 0 var(--border); }
+.secondary-btn, .mic-btn { background: white; color: var(--ink); box-shadow: 4px 4px 0 rgba(44, 38, 32, .35); }
+.ghost-btn { background: transparent; box-shadow: none; padding: 9px 14px; }
+
+button:hover { transform: translate(-1px, -1px); }
+button:active { transform: translate(2px, 2px); box-shadow: none; }
+button:disabled { opacity: .55; cursor: not-allowed; transform: none; }
+
+.job-card-screen { display: grid; place-items: center; }
+.job-card { width: min(760px, 100%); }
+.requirements-box { margin: 24px 0; padding: 20px; border: 3px solid var(--border); border-radius: 22px; background: white; }
+.requirements-box h3 { margin-bottom: 12px; }
+.requirements-box ol { margin: 0; padding-left: 24px; display: grid; gap: 10px; color: var(--muted); line-height: 1.55; font-weight: 800; }
+
+.game-screen {
+  display: grid;
+  grid-template-columns: 315px 1fr;
+  gap: 20px;
+  min-height: calc(100vh - 56px);
+}
+
+.side-panel, .chat-shell {
+  border: 3px solid var(--border);
+  border-radius: 28px;
+  background: var(--paper);
+  box-shadow: var(--shadow);
+}
+
+.side-panel {
+  padding: 20px;
+  display: grid;
+  align-content: start;
+  gap: 18px;
+}
+
+.raccoon-profile {
+  align-items: flex-start;
+}
+
+.raccoon-face {
+  width: 92px;
+  height: 92px;
+  display: grid;
+  place-items: center;
+  border: 3px solid var(--border);
+  border-radius: 26px;
+  background: linear-gradient(160deg, #ffe0bd, #e7f4d9);
+  font-size: 52px;
+  transition: transform .2s ease;
+}
+
+.raccoon-face.suspicious { transform: rotate(-5deg) scale(1.04); }
+.raccoon-face.happy { transform: rotate(5deg) scale(1.04); }
+.raccoon-face.angry { transform: translateY(-4px) rotate(-3deg); }
+.raccoon-face.thinking { animation: tinyBounce .8s infinite; }
+.raccoon-face.speaking { animation: speakPop .13s ease; }
+
+.emotion-text { margin: 8px 0 0; color: var(--muted); font-weight: 850; }
+
+.job-mini-card {
+  padding: 16px;
+  border: 3px solid var(--border);
+  border-radius: 22px;
+  background: var(--paper-2);
+}
+
+.mini-requirements {
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+}
+
+.mini-requirements li {
+  padding: 8px 10px;
+  border: 2px solid var(--border);
+  border-radius: 14px;
+  background: white;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 850;
+}
+
+.chat-shell {
+  min-height: 720px;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  overflow: hidden;
+}
+
+.chat-header {
+  justify-content: space-between;
+  padding: 18px 20px;
+  border-bottom: 3px solid var(--border);
+  background: rgba(255,255,255,.45);
+}
+
+.chat-list {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+.message-row {
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+  animation: messageIn .22s ease both;
+}
+
+.message-row.user { justify-content: flex-end; }
+.message-row.ai { justify-content: flex-start; }
+
+.avatar {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  border: 2px solid var(--border);
+  border-radius: 14px;
+  background: #ffe0bd;
+  font-size: 21px;
+}
+
+.message-bubble {
+  max-width: min(68ch, 78%);
+  padding: 14px 16px;
+  border: 3px solid var(--border);
+  line-height: 1.6;
+  font-size: 17px;
+  font-weight: 780;
+  box-shadow: 4px 4px 0 rgba(44, 38, 32, .12);
+  white-space: pre-wrap;
+}
+
+.message-row.ai .message-bubble {
+  border-radius: 22px 22px 22px 6px;
+  background: white;
+}
+
+.message-row.user .message-bubble {
+  border-radius: 22px 22px 6px 22px;
+  background: #e7f4d9;
+}
+
+.typing-bubble {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  min-width: 78px;
+  min-height: 52px;
+}
+
+.typing-bubble span {
+  width: 9px;
+  height: 9px;
+  display: block;
+  border: 2px solid var(--border);
+  border-radius: 50%;
+  background: var(--accent);
+  animation: typingDot .9s infinite ease-in-out;
+}
+
+.typing-bubble span:nth-child(2) { animation-delay: .14s; }
+.typing-bubble span:nth-child(3) { animation-delay: .28s; }
+
+.composer {
+  padding: 16px;
+  display: grid;
+  gap: 12px;
+  border-top: 3px solid var(--border);
+  background: rgba(255,255,255,.45);
+}
+
+.answer-box {
+  min-height: 76px;
+  max-height: 150px;
+  line-height: 1.6;
+  overflow-y: auto;
+}
+
+.answer-box:empty::before { content: attr(data-placeholder); color: #b7aba0; }
+.composer-actions { justify-content: flex-end; flex-wrap: wrap; }
+.mic-btn.recording { background: #ffd7d7; animation: pulse 1s infinite; }
+.hint-text { margin: 0; font-size: 14px; }
+.header-actions { justify-content: flex-end; flex-wrap: wrap; }
+.voice-toggle { background: rgba(255,255,255,.55); }
+.voice-toggle.muted { opacity: .72; }
+.speaking-bubble::after {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 1.1em;
+  margin-left: 3px;
+  vertical-align: -2px;
+  border-radius: 99px;
+  background: var(--accent);
+  animation: caretBlink .75s infinite;
+}
+
+.result-screen { display: grid; place-items: center; }
+.result-card { text-align: center; }
+.result-logo { margin: 0 auto 18px; }
+.result-comment { font-size: 18px; }
+
+.score-grid { margin: 24px 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.score-grid div { padding: 16px 10px; border: 3px solid var(--border); border-radius: 18px; background: white; }
+.score-grid span { display: block; font-size: 34px; font-weight: 950; }
+.score-grid p { margin: 6px 0 0; color: var(--muted); font-size: 14px; }
+
+.result-actions { margin-top: 20px; justify-content: center; flex-wrap: wrap; }
+
+@keyframes popIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes messageIn { from { opacity: 0; transform: translateY(8px) scale(.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes typingDot { 0%, 80%, 100% { transform: translateY(0); opacity: .45; } 40% { transform: translateY(-6px); opacity: 1; } }
+@keyframes tinyBounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+@keyframes speakPop { 0% { transform: scale(1); } 45% { transform: scale(1.08) rotate(-2deg); } 100% { transform: scale(1); } }
+@keyframes caretBlink { 0%, 45% { opacity: 1; } 46%, 100% { opacity: 0; } }
+@keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.04); } }
+
+
+/* V5: job selection */
+.select-card {
+  width: min(960px, 100%);
+  margin: 48px auto;
+  padding: 34px;
+  border: 3px solid var(--border);
+  border-radius: 28px;
+  background: var(--paper);
+  box-shadow: var(--shadow);
+}
+
+.compact-intro { margin: 14px 0 22px; }
+
+.job-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.job-option-card {
+  display: grid;
+  gap: 14px;
+  padding: 20px;
+  border: 3px solid var(--border);
+  border-radius: 24px;
+  background: white;
+  box-shadow: 5px 5px 0 rgba(44, 38, 32, .12);
+}
+
+.job-option-card:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 7px 7px 0 rgba(44, 38, 32, .16);
+}
+
+.job-option-top {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.job-option-card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.65;
+  font-weight: 760;
+}
+
+.job-option-card ul {
+  margin: 0;
+  padding-left: 20px;
+  color: var(--muted);
+  line-height: 1.55;
+  font-weight: 850;
+}
+
+.questions-box ol li {
+  margin-bottom: 10px;
+}
+
+@media (max-width: 850px) {
+  .job-options { grid-template-columns: 1fr; }
+  .game-screen { grid-template-columns: 1fr; min-height: auto; }
+  .side-panel { grid-template-columns: 1fr; }
+  .chat-shell { min-height: 640px; }
+  .score-grid { grid-template-columns: repeat(2, 1fr); }
+  .message-bubble { max-width: 84%; }
+}
+
+/* ===== 移动端适配 ===== */
+@media (max-width: 600px) {
+  /* 全局 */
+  .app { width: 100%; padding: 8px 0; }
+  body { -webkit-text-size-adjust: 100%; }
+
+  /* 卡片通用 */
+  .start-screen, .job-card, .result-card, .select-card {
+    margin: 8px 6px;
+    padding: 18px 14px;
+    border-radius: 20px;
+  }
+
+  /* 品牌区 */
+  .brand { gap: 12px; }
+  .logo { width: 56px; height: 56px; font-size: 30px; border-radius: 16px; }
+  .small-logo { width: 48px; height: 48px; font-size: 28px; border-radius: 14px; }
+  h1 { font-size: clamp(28px, 7vw, 42px); }
+  h2 { font-size: clamp(20px, 5vw, 30px); }
+  h3 { font-size: 17px; }
+  .intro { font-size: 15px; margin: 14px 0; }
+  .eyebrow { font-size: 11px; }
+
+  /* 表单 */
+  .profile-form { gap: 12px; }
+  label { font-size: 14px; gap: 6px; }
+  input, .answer-box { padding: 12px 14px; font-size: 16px; border-radius: 14px; }
+
+  /* 按钮 */
+  .primary-btn, .secondary-btn, .mic-btn { padding: 14px 20px; font-size: 16px; border-radius: 999px; }
+  .ghost-btn { padding: 8px 12px; font-size: 13px; }
+
+  /* 岗位选择 */
+  .job-options { gap: 12px; }
+  .job-option-card { padding: 16px; gap: 10px; }
+  .job-option-top { gap: 10px; }
+
+  /* 面试卡 */
+  .requirements-box { padding: 14px; border-radius: 16px; margin: 16px 0; }
+  .requirements-box ol { font-size: 14px; gap: 8px; }
+
+  /* ===== 面试界面 ===== */
+  .game-screen {
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
+    gap: 0;
+  }
+
+  /* 侧边栏压缩为顶部信息条 */
+  .side-panel {
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 10px 12px;
+    gap: 10px;
+    border-radius: 0;
+    border: none;
+    border-bottom: 3px solid var(--border);
+    box-shadow: none;
+    background: var(--paper);
+  }
+
+  .raccoon-profile { gap: 10px; }
+  .raccoon-face { width: 44px; height: 44px; font-size: 26px; border-radius: 14px; }
+  .raccoon-profile h2 { font-size: 16px; }
+  .emotion-text { font-size: 12px; margin: 0; }
+
+  .job-mini-card { flex: 1; min-width: 0; padding: 10px; border-radius: 14px; }
+  .job-mini-card h3 { font-size: 13px; white-space: normal; line-height: 1.4; }
+  .mini-requirements { display: flex; flex-direction: column; gap: 6px; }
+
+  .trust-box { padding: 10px; border-radius: 14px; width: 100%; }
+  .trust-bar { height: 14px; }
+
+  /* 聊天区占满剩余空间 */
+  .chat-shell {
+    flex: 1;
+    width: 100%;
+    min-height: 0;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .chat-header { padding: 10px 12px; }
+  .chat-header h2 { font-size: 16px; }
+  .header-actions { gap: 6px; }
+
+  .chat-list { padding: 12px; gap: 10px; flex: 1; overflow-y: auto; }
+
+  .avatar { width: 32px; height: 32px; font-size: 18px; border-radius: 10px; }
+  .message-bubble { max-width: 85%; font-size: 15px; padding: 10px 12px; }
+
+  /* 输入区 */
+  .composer { padding: 10px 12px; gap: 8px; }
+  .answer-box { min-height: 56px; max-height: 120px; font-size: 16px; }
+  .composer-actions { gap: 8px; }
+  .mic-btn { flex: 1; max-width: 120px; }
+  .primary-btn#submitAnswerBtn { flex: 2; }
+  .hint-text { font-size: 12px; }
+
+  /* 结果页 */
+  .score-grid { gap: 8px; }
+  .score-grid div { padding: 12px 8px; border-radius: 14px; }
+  .score-grid span { font-size: 26px; }
+  .score-grid p { font-size: 12px; }
+  .offer-box { padding: 14px; border-radius: 16px; }
+  .result-actions { gap: 10px; }
+
+  /* 新版本特有元素适配 */
+  .start-raccoon {
+    width: 190px;
+    height: 190px;
+  }
+
+  .select-raccoon {
+    width: 92px;
+    height: 92px;
+    right: 8px;
+    top: 8px;
+    opacity: .5;
+  }
+
+  .result-logo {
+    width: 96px;
+    height: 96px;
+  }
+}
+
+/* Clean flow update: title-only start, direct-to-interview job selection */
+.start-screen {
+  min-height: calc(100vh - 56px);
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 28px;
+  text-align: center;
+}
+
+.start-brand {
+  flex-direction: column;
+  justify-content: center;
+  gap: 18px;
+}
+
+.start-brand .logo {
+  margin: 0 auto;
+}
+
+.start-btn {
+  min-width: 180px;
+  font-size: 20px;
+}
+
+.select-card h2 {
+  margin-bottom: 24px;
+}
+
+.job-option-card {
+  align-content: space-between;
+}
+
+.job-option-card .job-option-top {
+  justify-content: flex-start;
+}
+
+.job-option-card .job-option-top h3 {
+  font-size: 20px;
+}
+
+
+/* Job intro restored: choose job -> intro card -> interview */
+.job-intro-actions {
+  margin-top: 22px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+#introJobDesc {
+  margin: 22px 0 0;
+  font-size: 17px;
+}
+
+@media (max-width: 600px) {
+  .job-intro-actions {
+    justify-content: stretch;
+  }
+  .job-intro-actions button {
+    flex: 1;
+  }
+}
+
+/* 浣熊 IP 图片接入 */
+.image-logo,
+.raccoon-face,
+.avatar {
+  overflow: hidden;
+}
+
+.image-logo img,
+.raccoon-face img,
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.image-logo {
+  background: #fff4dc;
+  padding: 6px;
+}
+
+.start-raccoon {
+  width: min(280px, 64vw);
+  height: min(280px, 64vw);
+  border-radius: 34px;
+  transform: rotate(-4deg);
+  background: linear-gradient(145deg, #fff7e8, #ffe0bd);
+}
+
+.start-raccoon img {
+  filter: drop-shadow(0 8px 0 rgba(44, 38, 32, .12));
+}
+
+.raccoon-face {
+  padding: 5px;
+  background: linear-gradient(160deg, #fff7e8, #e7f4d9);
+}
+
+.avatar {
+  padding: 2px;
+  background: #fff4dc;
+}
+
+.result-logo {
+  width: 118px;
+  height: 118px;
+  border-radius: 28px;
+  transform: rotate(3deg);
+}
+
+.select-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.select-raccoon {
+  position: absolute;
+  right: 18px;
+  top: 10px;
+  width: 148px;
+  height: 148px;
+  object-fit: contain;
+  pointer-events: none;
+  transform: rotate(7deg);
+  opacity: .98;
+  filter: drop-shadow(6px 8px 0 rgba(44, 38, 32, .12));
+}
+
+.select-card h2,
+.job-options {
+  position: relative;
+  z-index: 1;
+}

@@ -1,0 +1,9 @@
+{
+  "name": "raccoon-interviewer-v5-more-jobs-no-ui",
+  "version": "4.0.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "openai": "latest"
+  }
+}

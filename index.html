@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>浣熊面试官 🦝 V5</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&amp;family=Noto+Sans+SC:wght@400;500;700;900&amp;display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="animal-island-theme.css" />
+  <link rel="stylesheet" href="cover-motion.css" />
+</head>
+<body>
+  <main class="app">
+    <section id="startScreen" class="screen start-screen">
+      <div class="start-art" aria-hidden="true">
+        <span class="art-leaf art-leaf-one"></span>
+        <span class="art-leaf art-leaf-two"></span>
+        <span class="art-flower"></span>
+      </div>
+      <div class="start-portrait">
+        <div class="logo image-logo start-raccoon"><img src="assets/raccoon/05.png" alt="浣熊面试官"></div>
+        <div class="stamp-badge start-crazy-stamp" aria-hidden="true">
+          <strong>疯掉了</strong>
+          <small>FREAKING OUT</small>
+        </div>
+      </div>
+      <div class="brand start-brand">
+        <h1><span>浣熊</span><span>面试官</span></h1>
+        <button id="enterJobSelectBtn" class="primary-btn start-btn action-icon icon-play" type="button">开始</button>
+      </div>
+    </section>
+
+    <section id="jobSelectScreen" class="screen job-select-screen hidden">
+      <div class="select-card">
+        <header class="select-card-header">
+          <h2>请选择你的职业</h2>
+          <div class="select-portrait">
+            <span class="select-portrait-halo" aria-hidden="true"></span>
+            <img class="select-raccoon" src="assets/raccoon/03.png" alt="从垃圾桶探头的浣熊">
+          </div>
+        </header>
+        <div id="jobOptions" class="job-options"></div>
+      </div>
+    </section>
+
+    <section id="jobIntroScreen" class="screen job-card-screen hidden">
+      <article class="job-card">
+        <div class="job-summary">
+          <div class="job-card-header">
+            <div id="introJobIcon" class="logo small-logo">🦝</div>
+            <div>
+              <p class="eyebrow">岗位介绍</p>
+              <h2 id="introJobTitle">岗位名称</h2>
+            </div>
+          </div>
+
+          <p id="introJobDesc" class="job-desc"></p>
+          <div class="job-stamp" aria-hidden="true">
+            <span></span>
+          </div>
+        </div>
+
+        <div class="requirements-box">
+          <h3>任职条件</h3>
+          <ol id="introJobRequirements"></ol>
+        </div>
+
+        <div class="job-intro-actions">
+          <button id="backToJobsBtn" class="secondary-btn action-icon icon-back" type="button">重新选择</button>
+          <button id="startInterviewBtn" class="primary-btn action-icon icon-chat" type="button">进入面试</button>
+        </div>
+      </article>
+    </section>
+
+    <section id="gameScreen" class="screen game-screen hidden">
+      <aside class="side-panel">
+        <div class="panel-decoration" aria-hidden="true">
+          <span></span>
+          <span></span>
+        </div>
+        <div class="raccoon-profile">
+          <div id="raccoonFace" class="raccoon-face"><img id="raccoonFaceImg" src="assets/raccoon/02.png" alt="浣熊 HR"></div>
+          <div>
+            <p class="eyebrow">面试官</p>
+            <h2>浣熊 HR</h2>
+            <p id="emotionText" class="emotion-text">专业审视中</p>
+          </div>
+        </div>
+
+        <div class="job-mini-card">
+          <p class="eyebrow">当前岗位</p>
+          <h3 id="jobTitle">加载中...</h3>
+          <ul id="jobRequirements" class="mini-requirements"></ul>
+        </div>
+
+      </aside>
+
+      <section class="chat-shell">
+        <header class="chat-header">
+          <span class="chat-header-knot" aria-hidden="true"></span>
+          <div>
+            <p class="eyebrow">聊天面试</p>
+            <h2 id="progressText">第 1 / 3 题</h2>
+          </div>
+          <div class="header-actions">
+            <button id="restartSmallBtn" class="ghost-btn icon-only icon-refresh" type="button" aria-label="重新开始面试" title="重开"></button>
+          </div>
+        </header>
+
+        <div id="chatList" class="chat-list" aria-live="polite"></div>
+
+        <footer class="composer">
+          <div id="answerBox" class="answer-box" contenteditable="true" data-placeholder=""></div>
+          <div class="composer-actions">
+            <button id="submitAnswerBtn" class="primary-btn action-icon icon-send" type="button">发送</button>
+          </div>
+          <p id="hintText" class="hint-text"></p>
+        </footer>
+      </section>
+    </section>
+
+    <section id="resultScreen" class="screen result-screen hidden">
+      <div class="result-card">
+        <div class="result-hero">
+          <div class="logo image-logo result-logo"><img src="assets/raccoon/07.png" alt="面试报告浣熊"></div>
+          <div id="resultOutcomeStamp" class="stamp-badge result-outcome-stamp" aria-hidden="true">
+            <strong>卖掉了</strong>
+            <small>SOLD OUT</small>
+          </div>
+          <div class="result-heading">
+            <p class="eyebrow">你在本次面试中被评为：</p>
+            <h2 id="resultTitle">结果生成中...</h2>
+            <p id="resultComment" class="result-comment"></p>
+          </div>
+        </div>
+
+        <div class="score-grid">
+          <div>
+            <span id="credibilityScore">0</span>
+            <p>简历含水量</p>
+          </div>
+          <div>
+            <span id="jargonScore">0</span>
+            <p>被叉出去风险</p>
+          </div>
+          <div>
+            <span id="survivalScore">0</span>
+            <p>黑眼圈共鸣值</p>
+          </div>
+        </div>
+
+        <div class="result-actions">
+          <button id="restartBtn" class="primary-btn action-icon icon-refresh" type="button">再面一次</button>
+          <button id="copyReportBtn" class="secondary-btn action-icon icon-copy" type="button">复制报告</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

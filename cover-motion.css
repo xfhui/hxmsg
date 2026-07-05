@@ -1,0 +1,51 @@
+/* Final cover motion overrides, loaded after the main theme. */
+.start-portrait {
+  animation: coverPortraitFloat 4.8s ease-in-out infinite;
+}
+
+.start-portrait::after {
+  display: none;
+  content: none;
+}
+
+.start-raccoon {
+  animation: none;
+}
+
+.start-crazy-stamp {
+  right: -56px;
+  bottom: -6px;
+  transform: rotate(-7deg) scale(1);
+}
+
+@keyframes coverPortraitFloat {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -9px;
+  }
+}
+
+@media (max-width: 850px) {
+  .start-crazy-stamp {
+    right: calc(50% - 218px);
+    bottom: -2px;
+    transform: rotate(-7deg) scale(.88);
+  }
+}
+
+@media (max-width: 600px) {
+  .start-crazy-stamp {
+    right: calc(50% - 164px);
+    bottom: -8px;
+    transform: rotate(-7deg) scale(.72);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .start-portrait {
+    animation: none;
+  }
+}
